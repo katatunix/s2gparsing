@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apple", "prj\apple\apple.vcxproj", "{C2720761-3484-4193-9434-8022924A028D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "banana", "prj\banana\banana.vcxproj", "{3C17E680-54E4-41B4-96F0-C4EFF04316BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2720761-3484-4193-9434-8022924A028D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C2720761-3484-4193-9434-8022924A028D}.Debug|Win32.Build.0 = Debug|Win32
+		{C2720761-3484-4193-9434-8022924A028D}.Release|Win32.ActiveCfg = Release|Win32
+		{C2720761-3484-4193-9434-8022924A028D}.Release|Win32.Build.0 = Release|Win32
+		{3C17E680-54E4-41B4-96F0-C4EFF04316BE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C17E680-54E4-41B4-96F0-C4EFF04316BE}.Debug|Win32.Build.0 = Debug|Win32
+		{3C17E680-54E4-41B4-96F0-C4EFF04316BE}.Release|Win32.ActiveCfg = Release|Win32
+		{3C17E680-54E4-41B4-96F0-C4EFF04316BE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,82 @@
+{
+	.PROJECT_Name = "banana_CPP"
+	#include "../__Common/__STD_CPP.bff"
+
+	#if USE_COMPILE_UNITS
+		#define BANANA_CPP_UNITY
+	#endif
+
+	.PROJECT_SourceFiles =
+	{
+		"$GameRoot$/src/source1.cpp"
+		"$GameRoot$/src/source101.cpp"
+		"$GameRoot$/src/source2.cpp"
+		"$GameRoot$/src/source3.cpp"
+		"$GameRoot$/src/source4.cpp"
+		"$GameRoot$/src/source5.cpp"
+		"$GameRoot$/src/source6.cpp"
+		"$GameRoot$/src/source7.cpp"
+	}
+
+	.ExcludedUnitySources =
+	{
+		"$GameRoot$/src/source8.cpp"
+		"$GameRoot$/src/source9.cpp"
+	}
+
+	#if BANANA_CPP_UNITY
+	Unity("$PROJECT_Name$_Unity")
+	{
+		.UnityInputFiles = .PROJECT_SourceFiles
+		.UnityNumFiles = 5
+	}
+	#endif
+
+	.CommonValues =
+	[
+		#if BANANA_CPP_UNITY
+		.CompilerInputUnity = "$PROJECT_Name$_Unity"
+		.CompilerInputFiles = .ExcludedUnitySources
+		#endif
+
+		#if !BANANA_CPP_UNITY
+		.CompilerInputFiles = .PROJECT_SourceFiles
+							+ .ExcludedUnitySources
+		#endif
+
+		.PROJECT_Defines = ""
+									+ " -DBANANA"
+		.PROJECT_IncludePaths = ""
+									+ " -I$GameRoot$/inc/1"
+									+ " -I$GameRoot$/inc/2"
+		.PROJECT_CompilerFlags = ""
+									+ " -flag1"
+									+ " -flag2"
+	]
+
+	.ReleaseValues =
+	[
+		.PROJECT_Release_SourceFiles =
+		{
+		}
+		.PROJECT_Release_Defines = ""
+									+ " -DBANANA_RELEASE"
+		.PROJECT_Release_IncludePaths = ""
+		.PROJECT_Release_CompilerFlags = ""
+									+ " -flag-release"
+	]
+
+	.DebugValues =
+	[
+		.PROJECT_Debug_SourceFiles =
+		{
+		}
+		.PROJECT_Debug_Defines = ""
+									+ " -DBANANA_DEBUG"
+		.PROJECT_Debug_IncludePaths = ""
+		.PROJECT_Debug_CompilerFlags = ""
+									+ " -flag-debug"
+	]
+
+	#include "../__Common/__CompileTargets.bff"
+}

@@ -1,0 +1,84 @@
+{
+	.PROJECT_Name = "apple"
+	#include "../__Common/__STD_CPP.bff"
+
+	#if USE_COMPILE_UNITS
+		#define APPLE_UNITY
+	#endif
+
+	.PROJECT_SourceFiles =
+	{
+		"$GameRoot$/src/source101.cpp"
+		"$GameRoot$/src/source104.cpp"
+		"$GameRoot$/src/source2.cpp"
+		"$GameRoot$/src/source3.cpp"
+		"$GameRoot$/src/source5.cpp"
+		"$GameRoot$/src/source6.cpp"
+		"$GameRoot$/src/source7.cpp"
+		"$GameRoot$/src/source8.cpp"
+		"$GameRoot$/src/source9.cpp"
+	}
+
+	.ExcludedUnitySources =
+	{
+		"$GameRoot$/src/source103.cpp"
+	}
+
+	#if APPLE_UNITY
+	Unity("$PROJECT_Name$_Unity")
+	{
+		.UnityInputFiles = .PROJECT_SourceFiles
+		.UnityNumFiles = 3
+	}
+	#endif
+
+	.CommonValues =
+	[
+		#if APPLE_UNITY
+		.CompilerInputUnity = "$PROJECT_Name$_Unity"
+		.CompilerInputFiles = .ExcludedUnitySources
+		#endif
+
+		#if !APPLE_UNITY
+		.CompilerInputFiles = .PROJECT_SourceFiles
+							+ .ExcludedUnitySources
+		#endif
+
+		.PROJECT_Defines = ""
+									+ " -DAHIHI"
+									+ " -DUSE_SOMETHING"
+									+ " -DYEAH=common"
+		.PROJECT_IncludePaths = ""
+									+ " -I$GameRoot$/inc/1"
+									+ " -I$GameRoot$/inc/2"
+		.PROJECT_CompilerFlags = ""
+									+ " -fno-exceptions"
+									+ " -fvisibility=hidden"
+	]
+
+	.ReleaseValues =
+	[
+		.PROJECT_Release_SourceFiles =
+		{
+			"$GameRoot$/src/source1.cpp"
+		}
+		.PROJECT_Release_Defines = ""
+									+ " -DYEAH=release"
+		.PROJECT_Release_IncludePaths = ""
+		.PROJECT_Release_CompilerFlags = ""
+	]
+
+	.DebugValues =
+	[
+		.PROJECT_Debug_SourceFiles =
+		{
+		}
+		.PROJECT_Debug_Defines = ""
+									+ " -DYEAH=debug"
+		.PROJECT_Debug_IncludePaths = ""
+									+ " -I$GameRoot$/inc"
+		.PROJECT_Debug_CompilerFlags = ""
+	]
+
+	#include "../__Common/__CompileTargets.bff"
+}

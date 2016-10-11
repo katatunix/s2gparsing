@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="s2gparsing:jar">
+    <output-path>$PROJECT_DIR$/build</output-path>
+    <root id="archive" name="s2gparsing.jar">
+      <element id="module-output" name="s2gparsing" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../kommon/build/kommon.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
