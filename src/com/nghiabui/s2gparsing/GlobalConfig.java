@@ -56,6 +56,14 @@ public class GlobalConfig {
 			.collect(Collectors.toSet());
 	}
 	
+	public Optional<Path> cCompiler(boolean release) {
+		return path("CC", release);
+	}
+	
+	public Optional<Path> cppCompiler(boolean release) {
+		return path("CPP", release);
+	}
+	
 	//========================================================================================================
 	
 	public List<String> ldlibs(boolean release) {
