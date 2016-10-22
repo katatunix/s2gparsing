@@ -1,11 +1,9 @@
 <component name="ArtifactManager">
-  <artifact name="s2gparsing:jar">
+  <artifact type="jar" name="s2gparsing:jar">
     <output-path>$PROJECT_DIR$/build</output-path>
-    <root id="root">
-      <element id="archive" name="s2gparsing.jar">
-        <element id="module-output" name="s2gparsing" />
-      </element>
-      <element id="library" level="project" name="kommon" />
+    <root id="archive" name="s2gparsing.jar">
+      <element id="module-output" name="s2gparsing" />
+      <element id="module-output" name="kommon" />
     </root>
   </artifact>
 </component>
