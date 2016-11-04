@@ -18,6 +18,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="kommon" />
+    <orderEntry type="library" name="kommon" level="project" />
   </component>
 </module>
