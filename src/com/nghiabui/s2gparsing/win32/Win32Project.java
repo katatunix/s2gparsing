@@ -9,6 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -40,16 +41,28 @@ public class Win32Project {
 				return grand != null && NodeUtil.isElement(grand) && conditionPassed((Element) grand, configName);
 			}).collect(Collectors.toList());
 		
-		final List<Element> externalElements = NodeUtil.toList(document.getElementsByTagName("ImportGroup")).stream()
+		final String PROJECT = "Project";
+		final List<String> propsFiles = NodeUtil.toList(document.getElementsByTagName("ImportGroup")).stream()
 			.filter(e -> "PropertySheets".equals(e.getAttribute("Label")) && conditionPassed(e, configName))
 			.flatMap(e -> NodeUtil.toList(e.getChildNodes()).stream())
 			.filter(e -> {
 				if (!e.getTagName().equals("Import")) return false;
-				final String project = e.getAttribute("Project");
+				final String project = e.getAttribute(PROJECT);
 				return project != null && !project.contains("$");
 			})
-			.flatMap(e -> {
-				final Path propsFilePath = projFolder.combination(e.getAttribute("Project"));
+			.map(e -> e.getAttribute(PROJECT))
+			.collect(Collectors.toList());
+		
+		final List<String> fullPropsFiles = new ArrayList<>();
+		final String COMMON_PROPS = "common.props";
+		if (projFolder.combination(COMMON_PROPS).exists()) {
+			fullPropsFiles.add(COMMON_PROPS);
+		}
+		fullPropsFiles.addAll(propsFiles);
+		
+		final List<Element> externalElements = fullPropsFiles.stream()
+			.flatMap(file -> {
+				final Path propsFilePath = projFolder.combination(file);
 				final Optional<Document> op = DocumentFactory.createDocument(propsFilePath);
 				if (!op.isPresent()) {
 					throw new AppException("Could not read and parse: \"" + propsFilePath.absolute() + "\"");
@@ -58,14 +71,14 @@ public class Win32Project {
 			})
 			.collect(Collectors.toList());
 		
-		return handle_AID_Elements(ListOperation.concat(mainElements, externalElements));
+		return aidElements2Paths(ListOperation.concat(mainElements, externalElements));
 	}
 	
 	private static List<Element> aidElements(Document doc) {
 		return NodeUtil.toList(doc.getElementsByTagName("AdditionalIncludeDirectories"));
 	}
 	
-	private List<Path> handle_AID_Elements(List<Element> elements) {
+	private List<Path> aidElements2Paths(List<Element> elements) {
 		return elements.stream()
 			.map(Node::getTextContent)
 			.flatMap(paths -> Arrays.stream(paths.split(";")))

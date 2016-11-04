@@ -29,8 +29,8 @@
       <file leaf-file-name="Win32Project.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nghiabui/s2gparsing/win32/Win32Project.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+            <state relative-caret-position="323">
+              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -384,17 +384,17 @@
     <history-entry file="All_in_s2gparsing - 2016.11.04 at 14h 48m 41s.xml">
       <configuration name="All in s2gparsing" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_s2gparsing_(1) - 2016.11.04 at 10h 30m 44s.xml">
-      <configuration name="All in s2gparsing (1)" configurationId="JUnit" />
+    <history-entry file="All_in_s2gparsing - 2016.11.04 at 16h 12m 45s.xml">
+      <configuration name="All in s2gparsing" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_s2gparsing_(1) - 2016.11.04 at 10h 30m 58s.xml">
-      <configuration name="All in s2gparsing (1)" configurationId="JUnit" />
+    <history-entry file="All_in_s2gparsing - 2016.11.04 at 16h 13m 47s.xml">
+      <configuration name="All in s2gparsing" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_s2gparsing - 2016.11.04 at 17h 00m 12s.xml">
+      <configuration name="All in s2gparsing" configurationId="JUnit" />
     </history-entry>
     <history-entry file="All_in_s2gparsing_(1) - 2016.11.04 at 10h 56m 05s.xml">
       <configuration name="All in s2gparsing (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SystemMacrosTest - 2016.10.11 at 16h 21m 43s.xml">
-      <configuration name="SystemMacrosTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -807,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nghiabui/s2gparsing/win32/Win32Project.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+        <state relative-caret-position="323">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
           <folding />
         </state>
       </provider>
