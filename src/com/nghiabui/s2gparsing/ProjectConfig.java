@@ -1,5 +1,6 @@
 package com.nghiabui.s2gparsing;
 
+import com.nghiabui.kommon.MapOperation;
 import com.nghiabui.kommon.io.MatchingFolder;
 import com.nghiabui.kommon.io.WildcardFolder;
 import com.nghiabui.s2gparsing.macro.Macros;
@@ -71,14 +72,13 @@ public class ProjectConfig {
 	}
 	
 	public Set<Path> includePaths(boolean release) {
-		final Set<Path> paths = paths("INCLUDE_PATHS", release);
-		if (!useWin32IncludePaths(release)) return paths;
+		final Set<Path> s2gPaths = paths("INCLUDE_PATHS", release);
+		if (!useWin32IncludePaths(release)) return s2gPaths;
 		
-		final Set<Path> totalPaths = new HashSet<>(
+		final Set<Path> win32Paths = new HashSet<>(
 			win32Project.includePaths(nonmacConfig.msvcConfiguration(release))
 		);
-		totalPaths.addAll(paths);
-		return totalPaths;
+		return SetOperation.union(s2gPaths, win32Paths);
 	}
 	
 	private boolean useWin32IncludePaths(boolean release) {

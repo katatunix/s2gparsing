@@ -44,21 +44,22 @@ class FinalDocument {
 	
 	private ResolvedMacros element2macros(Element parent) {
 		return new ResolvedMacros(new CompositeMacros(
-			new XmlMacros(macroChildren(parent)),
+			new XmlMacros(macroElements(parent)),
 			systemMacros
 		));
 	}
 	
 	private Tuple<ResolvedMacros, NonmacConfig> element2info(Element e) {
 		final ResolvedMacros macros = element2macros(e);
-		return new Tuple<>(macros, new NonmacConfig(nonmacroChildren(e), macros));
+		final NonmacConfig nonmacConfig = new NonmacConfig(nonmacroElements(e), macros);
+		return new Tuple<>(macros, nonmacConfig);
 	}
 	
-	private List<Element> macroChildren(Element parent) {
+	private List<Element> macroElements(Element parent) {
 		return NodeUtil.toList(parent.getChildNodes()).stream().filter(this::isMacro).collect(Collectors.toList());
 	}
 	
-	private List<Element> nonmacroChildren(Element parent) {
+	private List<Element> nonmacroElements(Element parent) {
 		return NodeUtil.toList(parent.getChildNodes()).stream().filter(e -> !isMacro(e)).collect(Collectors.toList());
 	}
 	
