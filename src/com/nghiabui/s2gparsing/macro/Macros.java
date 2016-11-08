@@ -1,5 +1,7 @@
 package com.nghiabui.s2gparsing.macro;
 
+import com.nghiabui.kommon.SetOperation;
+
 import java.util.*;
 
 public abstract class Macros {
@@ -12,7 +14,7 @@ public abstract class Macros {
 	}
 	
 	public Set<String> getAsSet(String name, boolean release) {
-		return new HashSet<>(getAsList(name, release));
+		return SetOperation.newSet(getAsList(name, release));
 	}
 
 	public Optional<Boolean> getAsBoolean(String name, boolean release) {

@@ -1,13 +1,12 @@
 package com.nghiabui.s2gparsing;
 
-import com.nghiabui.kommon.MapOperation;
+import com.nghiabui.kommon.Path;
+import com.nghiabui.kommon.SetOperation;
+import com.nghiabui.kommon.Tuple;
 import com.nghiabui.kommon.io.MatchingFolder;
 import com.nghiabui.kommon.io.WildcardFolder;
 import com.nghiabui.s2gparsing.macro.Macros;
 import com.nghiabui.s2gparsing.win32.Win32Project;
-import com.nghiabui.kommon.Path;
-import com.nghiabui.kommon.SetOperation;
-import com.nghiabui.kommon.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,24 +71,23 @@ public class ProjectConfig {
 	}
 	
 	public Set<Path> includePaths(boolean release) {
-		final Set<Path> s2gPaths = paths("INCLUDE_PATHS", release);
-		if (!useWin32IncludePaths(release)) return s2gPaths;
-		
-		final Set<Path> win32Paths = new HashSet<>(
-			win32Project.includePaths(nonmacConfig.msvcConfiguration(release))
-		);
-		return SetOperation.union(s2gPaths, win32Paths);
+		final Set<Path> result = SetOperation.newSet();
+		if (useWin32IncludePaths(release)) {
+			result.addAll(win32Project.includePaths(nonmacConfig.msvcConfiguration(release)));
+		}
+		result.addAll(paths("INCLUDE_PATHS", release));
+		return result;
 	}
 	
 	private boolean useWin32IncludePaths(boolean release) {
 		return macros.getAsBoolean("USE_ADDITIONAL_INCLUDE_DIRECTORIES_FROM_VS", release).orElse(false);
 	}
 	
-	private Set<Path> paths(String name, boolean release) {
+	private List<Path> paths(String name, boolean release) {
 		final Path win32Folder = win32Project.folderPath();
-		return macros.getAsSet(name, release).stream()
+		return macros.getAsList(name, release).stream()
 			.map(win32Folder::combination)
-			.collect(Collectors.toSet());
+			.collect(Collectors.toList());
 	}
 	
 	private Set<Path> cachedReleaseSources = null;
@@ -97,7 +95,7 @@ public class ProjectConfig {
 	
 	public Set<Path> sources(boolean release) {
 		if (cachedReleaseSources == null) {
-			final Set<Path> full = new HashSet<>();
+			final Set<Path> full = SetOperation.newSet();
 			
 			full.addAll(win32Project.fullSources());
 			full.addAll(wildcardFolder().matchedFiles(nonmacConfig.additionalPatterns(release)));
@@ -111,11 +109,11 @@ public class ProjectConfig {
 				macros.getAsBoolean("USE_EXCLUDEFROMBUILD_VS_FLAG", release).orElse(false);
 			
 			final Set<Path> releaseExc = useWin32ExcludeFlag ?
-				new HashSet<>(win32Project.excludedSources(nonmacConfig.msvcConfiguration(true))) :
+				SetOperation.newSet(win32Project.excludedSources(nonmacConfig.msvcConfiguration(true))) :
 				Collections.emptySet();
 			
 			final Set<Path> debugExc = useWin32ExcludeFlag ?
-				new HashSet<>(win32Project.excludedSources(nonmacConfig.msvcConfiguration(false))) :
+				SetOperation.newSet(win32Project.excludedSources(nonmacConfig.msvcConfiguration(false))) :
 				Collections.emptySet();
 			
 			final Set<Path> releaseSources  = SetOperation.subtract(full, releaseExc);
@@ -137,7 +135,7 @@ public class ProjectConfig {
 		final List<Path> result = matchingFolder().matchedPaths(
 			nonmacConfig.ubExcludedPatterns(release), sources(release)
 		);
-		return new HashSet<>(result);
+		return SetOperation.newSet(result);
 	}
 	
 	public List<String> ldlibs(boolean release) {

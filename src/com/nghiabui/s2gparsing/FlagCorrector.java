@@ -1,6 +1,7 @@
 package com.nghiabui.s2gparsing;
 
 import com.nghiabui.kommon.AppException;
+import com.nghiabui.kommon.SetOperation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ class FlagCorrector {
 				throw new AppException("Something went wrong with the flag list: " + flags.toString());
 			}
 		}
-		return new HashSet<>(result);
+		return SetOperation.newSet(result);
 	}
 	
 }
