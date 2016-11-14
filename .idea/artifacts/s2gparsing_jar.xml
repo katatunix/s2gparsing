@@ -5,6 +5,7 @@
       <element id="archive" name="s2gparsing.jar">
         <element id="module-output" name="s2gparsing" />
       </element>
+      <element id="library" level="project" name="kommon" />
     </root>
   </artifact>
 </component>
